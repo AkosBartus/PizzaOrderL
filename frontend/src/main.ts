@@ -261,6 +261,12 @@ if (app) {
         orderData.address = address;
         orderData.orderTime = new Date().toISOString();
         console.log(orderData);
+
+/*         const response=await http.post("http://localhost:3333/api/order",JSON.stringify(orderDetails),{
+    headers:{
+      "Content-Type":"application/json"
+    }
+  } ) */
       });
     })
 }
