@@ -29,7 +29,7 @@ if (app) {
     orderButton.addEventListener('click', () => {
       app.innerHTML = 
       `
-      <nav class="w-screen h-14 relative top-0 z-50 bg-gray-500 flex items-center"><a class="text-lg font-extrabold pl-10" href="index.html">Pizzu</a></nav>
+      <nav class="w-[99.1vw] h-14 relative top-0 bg-gray-500 flex items-center"><a class="text-lg font-extrabold pl-10" href="index.html">Pizzu</a></nav>
       <div class="flex justify-center items-center"><h1 class="text-white text-7xl mt-5">Rendelés</h1></div>
       <div class="flex justify-center flex-wrap">
         <div class="flex items-center flex-col">
@@ -146,16 +146,21 @@ if (app) {
           <button id="cart7"><img src="/public/kosar.png" alt="" class="w-10 rounded-lg m-5"></button>
         </div>
       </div>
-      <div class="flex flex-wrap gap-10 mt-36 justify-center">
-          <input type="text" name="" id="name" placeholder="Név" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
-          <input type="text" name="" id="city" placeholder="Város" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
-          <input type="text" name="" id="street" placeholder="Utca" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
-          <input type="text" name="" id="house-number" placeholder="Házszám" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
-          <input type="text" name="" id="zip-code" placeholder="Irányítószám" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
-          <input type="number" name="" id="tel-number" placeholder="Telefonszám" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
-          <input type="email" name="" id="email" placeholder="E-mail" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
+      <div class="mt-20">
+        <h1 class="font-bold text-white text-xl m-6">Adatok megadása: </h1>
+        <div class="flex flex-wrap gap-10 justify-center">
+            <input type="text" name="" id="name" placeholder="Név" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
+            <input type="text" name="" id="city" placeholder="Város" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
+            <input type="text" name="" id="street" placeholder="Utca" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
+            <input type="text" name="" id="house-number" placeholder="Házszám" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
+            <input type="text" name="" id="zip-code" placeholder="Irányítószám" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
+            <input type="number" name="" id="tel-number" placeholder="Telefonszám" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
+            <input type="email" name="" id="email" placeholder="E-mail" class="text-white font-bold bg-gray-800 border-white border-2 rounded-md p-2">
+        </div>
       </div>
-      <div id="result"></div>
+      <div id="result" class="flex justify-center text-white font-bold flex-col items-center">
+      <h1 class="font-bold text-lg m-6">Az ön rendelései: </h1>
+      </div>
       <div class="flex justify-center">
       <button class="text-white font-bold border-solid border-2 border-gray-500 p-5 rounded-full transition duration-300 ease-in-out hover:scale-125 mb-20 mt-5" id="summary">Rendelés véglegesítése</button>
       </div>
@@ -214,7 +219,7 @@ if (app) {
           item.quantity += quantity;
       
           const resultParagraph = document.getElementById('result') as HTMLParagraphElement;
-          resultParagraph.innerHTML += `${quantity} darab ${item.input.id} hozzáadva a kosárhoz. Összesen: ${item.quantity} db`;
+          resultParagraph.innerHTML += `${quantity} darab ${item.input.id} hozzáadva a kosárhoz. Összesen: ${item.quantity} db <br>`;
       
           const cartItemInOrderData = orderData.cartItems.find(cartItem => cartItem.input === item.input);
           if (cartItemInOrderData) {
