@@ -255,7 +255,7 @@ if (app) {
       };
       
       summaryButton.addEventListener('click', async () => {
-        const sentData = {
+        const dataToSend = {
           name: nameInput.value,
           city: cityInput.value,
           street: streetInput.value,
@@ -274,7 +274,7 @@ if (app) {
           }
         }
 
-        const response = await http.post("http://localhost:3333/api/order",JSON.stringify(sentData),{
+        const response = await http.post("http://localhost:3333/api/order",JSON.stringify(dataToSend),{
         headers:{
         "Content-Type":"application/json"
         }
