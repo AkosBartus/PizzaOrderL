@@ -273,14 +273,13 @@ if (app) {
               margherita: cartItems[6].quantity,
           }
         }
-        /*orderData.orderTime = new Date().toISOString();
-        console.log(orderData); */
 
         const response = await http.post("http://localhost:3333/api/order",JSON.stringify(sentData),{
         headers:{
         "Content-Type":"application/json"
         }
         })
+        console.log(response)
 
         app.innerHTML = 
         `
