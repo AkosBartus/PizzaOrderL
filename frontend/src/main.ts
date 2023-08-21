@@ -217,6 +217,7 @@ if (app) {
       function addToCart(item: CartItem) {
         item.cartButton.addEventListener('click', () => {
           const quantity = parseInt(item.input.value, 10);
+          if (quantity > 0)
           item.quantity += quantity;
       
           const resultParagraph = document.getElementById('result') as HTMLParagraphElement;
@@ -228,7 +229,7 @@ if (app) {
           }
         });
       }
-      cartItems.forEach(addToCart);
+      cartItems.forEach(addToCart)
       
       const nameInput = document.getElementById('name') as HTMLInputElement;
       const cityInput = document.getElementById('city') as HTMLInputElement;
@@ -271,10 +272,8 @@ if (app) {
               husimado: cartItems[5].quantity,
               margherita: cartItems[6].quantity,
           }
-        };
-        console.log(address)
-
-/*         orderData.orderTime = new Date().toISOString();
+        }
+        /*orderData.orderTime = new Date().toISOString();
         console.log(orderData); */
 
         const response = await http.post("http://localhost:3333/api/order",JSON.stringify(address),{
@@ -282,6 +281,18 @@ if (app) {
         "Content-Type":"application/json"
         }
         })
+
+        app.innerHTML = 
+        `
+        <nav class="w-[99.3vw] h-14 relative top-0 bg-gray-500 flex items-center"><a class="text-lg font-extrabold pl-10" href="index.html">Pizzu</a></nav>
+        <div class="flex justify-center items-center content-center h-screen flex-col">
+          <h1 class="text-white text-7xl mt-5">Köszönjük a rendelésed!</h1>
+          <div class="flex justify-center items-center flex-col">
+          <h2 class="text-white mt-5 font-bold text-5xl"> ${nameInput.value}</h2>
+          <p class="text-white font-bold text-3xl mt-5">Jó étvágyat kívánunk!</p>
+          </div>
+        </div>
+        `
       });
     })
 }
