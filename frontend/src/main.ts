@@ -1,3 +1,4 @@
+import http from 'axios'
 import "./style.css";
 
 const app = document.getElementById('app') as HTMLDivElement
@@ -252,26 +253,35 @@ if (app) {
         orderTime: "",
       };
       
-      summaryButton.addEventListener('click', () => {
-        const address: Address = {
+      summaryButton.addEventListener('click', async () => {
+        const address = {
           name: nameInput.value,
           city: cityInput.value,
           street: streetInput.value,
-          houseNumber: houseNumberInput.value,
-          zipCode: zipCodeInput.value,
-          telNumber: telNumberInput.value,
+          houseNumber: +houseNumberInput.value,
+          zipCode: +zipCodeInput.value,
+          telNumber: +telNumberInput.value,
           email: emailInput.value,
+          cartItems: {
+              paradiso: cartItems[0].quantity,
+              szalamis: cartItems[1].quantity,
+              paradicsomos: cartItems[2].quantity,
+              formaggi: cartItems[3].quantity,
+              stagioni: cartItems[4].quantity,
+              husimado: cartItems[5].quantity,
+              margherita: cartItems[6].quantity,
+          }
         };
-      
-        orderData.address = address;
-        orderData.orderTime = new Date().toISOString();
-        console.log(orderData);
+        console.log(address)
 
-/*         const response=await http.post("http://localhost:3333/api/order",JSON.stringify(orderDetails),{
-    headers:{
-      "Content-Type":"application/json"
-    }
-  } ) */
+/*         orderData.orderTime = new Date().toISOString();
+        console.log(orderData); */
+
+        const response = await http.post("http://localhost:3333/api/order",JSON.stringify(address),{
+        headers:{
+        "Content-Type":"application/json"
+        }
+        })
       });
     })
 }

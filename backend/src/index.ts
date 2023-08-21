@@ -9,34 +9,15 @@ const server = express()
 server.use(cors())
 server.use(express.json())
 
-type CartItems = {
-  paradiso: number;
-  szalamis: number;
-  paradicsomos: number;
-  formaggi: number;
-  stagioni: number;
-  husimado: number;
-  margherita: number;
-};
-
-type OrderRequestData = {
-  name: string;
-  city: string;
-  street: string;
-  houseNumber: number;
-  phoneNumber: number;
-  email: string;
-  cartItems: CartItems;
-  date: string;
-};
 
 const OrderSchema = z.object({
   name: z.string(),
   city: z.string(),
   street: z.string(),
   houseNumber: z.number(),
-  phoneNumber: z.number(),
+  telNumber: z.number(),
   email: z.string(),
+  zipCode: z.number(),
   cartItems: z.object({
     paradiso: z.number(),
     szalamis: z.number(),
@@ -46,7 +27,7 @@ const OrderSchema = z.object({
     husimado: z.number(),
     margherita: z.number(),
   }),
-  date: z.string(),
+/*   date: z.string(), */
 });
 
 server.post("/api/order", async (req: Request, res: Response) => {
@@ -55,16 +36,7 @@ server.post("/api/order", async (req: Request, res: Response) => {
   if (!result.success)
     return res.sendStatus(400)
 
-    const newOrder: OrderRequestData = {
-      name: result.data.name,
-      city: result.data.city,
-      street: result.data.street,
-      houseNumber: result.data.houseNumber,
-      phoneNumber: result.data.phoneNumber,
-      email: result.data.email,
-      cartItems: result.data.cartItems,
-      date: result.data.date,
-    };
+    const newOrder = result.data
 
   const jsonFilePath = path.join("./database/", `order_${Date.now()}.json`);
   await fs.writeFile(jsonFilePath, JSON.stringify(newOrder), "utf-8")
